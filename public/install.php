@@ -254,7 +254,7 @@ function generate_keypair(string $authDir): array
     $priv = $keysDir . '/private.pem';
     $pub = $keysDir . '/public.pem';
     if (is_file($priv)) {
-        return [true, 'keys/private.pem existierte bereits — unverändert gelassen.'];
+        return [true, 'keys/private.pem existierte bereits, unverändert gelassen.'];
     }
     if (!is_dir($keysDir) && !@mkdir($keysDir, 0700, true)) {
         return [false, 'Konnte services/auth/keys/ nicht anlegen.'];
@@ -290,11 +290,11 @@ function create_admin_account(array $c): array
 {
     $email = strtolower(trim((string) ($c['admin_email'] ?? '')));
     if ($email === '' || filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
-        return [false, 'Ungültige Admin-E-Mail — Konto nicht angelegt.'];
+        return [false, 'Ungültige Admin-E-Mail: Konto nicht angelegt.'];
     }
     $password = (string) ($c['admin_password'] ?? '');
     if ($password === '') {
-        return [false, 'Kein Admin-Passwort gesetzt — Konto nicht angelegt.'];
+        return [false, 'Kein Admin-Passwort gesetzt: Konto nicht angelegt.'];
     }
     $hash = password_hash($password, PASSWORD_ARGON2ID);
     if ($hash === false) {
@@ -367,7 +367,7 @@ function run_migration(string $serviceDir, int $timeout = 120): array
         return [false, 'phinx nicht gefunden (vendor/ fehlt im Bundle).'];
     }
     if (!migrations_available()) {
-        return [false, 'proc_open ist deaktiviert und In-Process-Migration nicht verfügbar — Migration bitte manuell ausführen (siehe unten).'];
+        return [false, 'proc_open ist deaktiviert und In-Process-Migration nicht verfügbar: Migration bitte manuell ausführen (siehe unten).'];
     }
     $descriptors = [1 => ['pipe', 'w'], 2 => ['pipe', 'w']];
     $cmd = [php_cli_binary(), 'vendor/bin/phinx', 'migrate', '-e', 'production'];
@@ -392,7 +392,7 @@ function run_migration(string $serviceDir, int $timeout = 120): array
             fclose($pipes[1]);
             fclose($pipes[2]);
             proc_close($proc);
-            return [false, "Zeitüberschreitung nach {$timeout}s — Migration abgebrochen "
+            return [false, "Zeitüberschreitung nach {$timeout}s: Migration abgebrochen "
                 . "(DB erreichbar? Zugangsdaten korrekt?).\n" . trim($out)];
         }
         usleep(100_000);
@@ -459,7 +459,7 @@ function migrate_frontend(string $frontendDir): array
 {
     $autoload = $frontendDir . '/vendor/autoload.php';
     if (!is_file($autoload)) {
-        return [false, 'services/frontend/vendor/ fehlt — Bundle nicht assembliert.'];
+        return [false, 'services/frontend/vendor/ fehlt: Bundle nicht assembliert.'];
     }
     require_once $autoload;
     if (!class_exists(\Tds\CoreFrontendApi\Bootstrap::class)
@@ -487,7 +487,7 @@ function migrate_frontend(string $frontendDir): array
         $runner->ensureMigrated();
     } catch (\Throwable $e) {
         return [false, 'Frontend-Migration fehlgeschlagen: ' . $e->getMessage()
-            . ' — läuft ansonsten automatisch beim ersten Request.'];
+            . ', läuft ansonsten automatisch beim ersten Request.'];
     }
 
     // Verify by counting applied migrations in the shared phinxlog. A zero here
@@ -501,7 +501,7 @@ function migrate_frontend(string $frontendDir): array
             [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_TIMEOUT => 5]
         );
         $count = (int) $pdo->query('SELECT COUNT(*) FROM phinxlog')->fetchColumn();
-        return [true, "Extensions migriert (in-process) — {$count} Migration(en) im phinxlog."];
+        return [true, "Extensions migriert (in-process): {$count} Migration(en) im phinxlog."];
     } catch (\Throwable $e) {
         return [true, 'Frontend-Migrator ausgeführt; Verifikation übersprungen ('
             . $e->getMessage() . '). Läuft zusätzlich beim ersten Request.'];
@@ -585,7 +585,7 @@ function run_task(string $id, array $c, string $gatewayDir, string $servicesDir,
 
         case 'finalize':
             $ok = @file_put_contents($lockFile, gmdate('c') . "\n") !== false;
-            return [$ok, $ok ? 'Installation abgeschlossen — Sperre gesetzt.' : 'Konnte .tds-installed nicht schreiben.'];
+            return [$ok, $ok ? 'Installation abgeschlossen: Sperre gesetzt.' : 'Konnte .tds-installed nicht schreiben.'];
     }
     return [false, "Unbekannter Schritt: {$id}"];
 }
@@ -637,14 +637,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['__task'])) {
     };
 
     if (!$bundleOk) {
-        $fail('Service-Verzeichnisse nicht gefunden — Bundle nicht assembliert.');
+        $fail('Service-Verzeichnisse nicht gefunden: Bundle nicht assembliert.');
     }
     if (file_exists($LOCK_FILE)) {
         $fail('Bereits installiert (.tds-installed vorhanden).');
     }
     $c = $_SESSION['tds_install'] ?? null;
     if (!is_array($c) || ($c['db_user'] ?? '') === '') {
-        $fail('Sitzung abgelaufen — bitte den Assistenten von vorne starten.');
+        $fail('Sitzung abgelaufen, bitte den Assistenten von vorne starten.');
     }
 
     try {
@@ -770,7 +770,7 @@ $steps = [1 => 'Voraussetzungen', 2 => 'Datenbank', 3 => 'Konfiguration', 4 => '
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="robots" content="noindex" />
-<title>TDS API — Installation</title>
+<title>TDS API: Installation</title>
 <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 <style>
   /* Flat design — matches the admin/customer panels: solid surfaces, hairlines
@@ -891,7 +891,7 @@ $steps = [1 => 'Voraussetzungen', 2 => 'Datenbank', 3 => 'Konfiguration', 4 => '
       // vendor/ is present; proc_open is only the legacy fallback.
       $inProcessMig = is_file($GATEWAY_DIR . '/vendor/autoload.php');
       $checks[] = ['Migrationen ausführbar', $inProcessMig || migrations_available(),
-          $inProcessMig ? 'in-process (Phinx) — kein proc_open nötig' : 'via proc_open (Fallback)'];
+          $inProcessMig ? 'in-process (Phinx), kein proc_open nötig' : 'via proc_open (Fallback)'];
       $hardFail = !version_compare(PHP_VERSION, '8.1.0', '>=')
         || !extension_loaded('pdo_mysql') || !extension_loaded('openssl') || !$writable;
     ?>
@@ -929,14 +929,14 @@ $steps = [1 => 'Voraussetzungen', 2 => 'Datenbank', 3 => 'Konfiguration', 4 => '
           <div><label>Frontend <span class="opt">(alle Extensions)</span></label><input type="text" name="db_frontend" value="<?= h(cfg('db_frontend', 'tds_frontend')) ?>" /></div>
         </div>
         <label class="cb"><input type="checkbox" name="create_dbs" value="1" checked /> Fehlende Datenbanken anlegen (Benutzer braucht das <code>CREATE</code>-Recht)</label>
-        <label class="cb"><input type="checkbox" name="reset_dbs" value="1" /> <strong>Vorhandene Tabellen zuerst löschen</strong> (Neuinstallation / Reparatur eines abgebrochenen Migrationslaufs) — <span style="color:var(--err)">löscht alle Tabellen in den drei Datenbanken</span></label>
+        <label class="cb"><input type="checkbox" name="reset_dbs" value="1" /> <strong>Vorhandene Tabellen zuerst löschen</strong> (Neuinstallation / Reparatur eines abgebrochenen Migrationslaufs): <span style="color:var(--err)">löscht alle Tabellen in den drei Datenbanken</span></label>
       </fieldset>
       <button class="btn" type="submit">Verbindung testen &amp; weiter →</button>
     </form>
 
   <?php elseif ($step === 3): ?>
     <h2>Konfiguration</h2>
-    <p>Geheimnisse + Dienst-URLs. Vorgaben sind sinnvoll voreingestellt. Drittanbieter-Schlüssel (Stripe, E-Mail/Resend, GitHub) werden hier <strong>nicht mehr</strong> gesetzt — sie konfigurierst du nach der Installation im Admin-Panel unter „Einstellungen“ bzw. dem Einrichtungsassistenten.</p>
+    <p>Geheimnisse + Dienst-URLs. Vorgaben sind sinnvoll voreingestellt. Drittanbieter-Schlüssel (Stripe, E-Mail/Resend, GitHub) werden hier <strong>nicht mehr</strong> gesetzt, sie konfigurierst du nach der Installation im Admin-Panel unter „Einstellungen“ bzw. dem Einrichtungsassistenten.</p>
     <form method="post"><input type="hidden" name="__csrf" value="<?= h((string) $_SESSION['tds_install_csrf']) ?>" />
       <input type="hidden" name="__step" value="3" />
       <fieldset>
@@ -966,7 +966,7 @@ $steps = [1 => 'Voraussetzungen', 2 => 'Datenbank', 3 => 'Konfiguration', 4 => '
       </fieldset>
       <fieldset>
         <legend>Speicherpfade</legend>
-        <label>Dokument-Verzeichnis <span class="opt">(außerhalb des Webroots, 700 — customer-api + documents-Extension)</span></label>
+        <label>Dokument-Verzeichnis <span class="opt">(außerhalb des Webroots, 700, customer-api + documents-Extension)</span></label>
         <input type="text" name="document_root_dir" value="<?= h(cfg('document_root_dir', $BUNDLE_DIR . '/var/customer-files')) ?>" />
       </fieldset>
       <button class="btn" type="submit">Weiter zur Übersicht →</button>
@@ -981,7 +981,7 @@ $steps = [1 => 'Voraussetzungen', 2 => 'Datenbank', 3 => 'Konfiguration', 4 => '
       <div class="check"><span class="badge b-ok">DB</span><span><?= h(cfg('db_user')) ?>@<?= h(cfg('db_host')) ?>:<?= h(cfg('db_port')) ?></span></div>
       <div class="check"><span class="badge b-ok">.env</span><span>auth, customer, frontend + gateway</span></div>
       <div class="check"><span class="badge b-ok">Keys</span><span>Auth RS256-Schlüsselpaar</span></div>
-      <div class="check"><span class="badge <?= migrations_available() ? 'b-ok' : 'b-warn' ?>">Migrationen</span><span><?= migrations_available() ? 'phinx je Service' : 'proc_open deaktiviert — manuell nötig' ?></span></div>
+      <div class="check"><span class="badge <?= migrations_available() ? 'b-ok' : 'b-warn' ?>">Migrationen</span><span><?= migrations_available() ? 'phinx je Service' : 'proc_open deaktiviert, manuell nötig' ?></span></div>
       <div class="check"><span class="badge b-ok">Admin</span><span><?= h(cfg('admin_email', 'admin@tracht-digital.de')) ?> (Login für management.tracht-digital.de)</span></div>
     </div>
 
@@ -1000,14 +1000,14 @@ $steps = [1 => 'Voraussetzungen', 2 => 'Datenbank', 3 => 'Konfiguration', 4 => '
     <div id="donePanel" hidden>
       <h2 id="doneHeading">Installation abgeschlossen</h2>
       <div class="note ok">
-        <strong>Admin-Login</strong> — melden Sie sich im Admin-Panel unter
+        <strong>Admin-Login</strong>, melden Sie sich im Admin-Panel unter
         <code>https://management.tracht-digital.de</code> an:<br />
         E-Mail: <code><?= h(cfg('admin_email', 'admin@tracht-digital.de')) ?></code><br />
         Passwort: <code><?= h(cfg('admin_password', 'tds-setup-admin')) ?></code><br />
         Sie werden beim ersten Login zum Setzen eines eigenen Passworts aufgefordert.
       </div>
       <div class="note ok">
-        Fertig — es müssen <strong>keine Dienst-Prozesse gestartet</strong> werden: Das Gateway bedient die
+        Fertig, es müssen <strong>keine Dienst-Prozesse gestartet</strong> werden: Das Gateway bedient die
         Services (auth, customer, frontend) im selben PHP-FPM-Prozess (<code>GATEWAY_MODE=inprocess</code>). Prüfen Sie die
         Plattform über <code>/healthz</code>; das interne API-Wiki liefert die Frontend-API unter <code>/wiki.json</code>.
       </div>
@@ -1021,7 +1021,7 @@ $steps = [1 => 'Voraussetzungen', 2 => 'Datenbank', 3 => 'Konfiguration', 4 => '
     </div>
 
     <noscript>
-      <div class="note warn">JavaScript ist deaktiviert — die Installation läuft als ein einzelner Vorgang (kann ein bis zwei Minuten dauern, kein Fortschrittsbalken).</div>
+      <div class="note warn">JavaScript ist deaktiviert, die Installation läuft als ein einzelner Vorgang (kann ein bis zwei Minuten dauern, kein Fortschrittsbalken).</div>
       <form method="post"><input type="hidden" name="__csrf" value="<?= h((string) $_SESSION['tds_install_csrf']) ?>" />
         <input type="hidden" name="__step" value="4" />
         <button class="btn" type="submit">Jetzt installieren →</button>
@@ -1086,7 +1086,7 @@ $steps = [1 => 'Voraussetzungen', 2 => 'Datenbank', 3 => 'Konfiguration', 4 => '
         function next() {
           if (i >= total) {
             label.textContent = anyFail
-              ? 'Abgeschlossen — einige Schritte sind fehlgeschlagen (siehe oben).'
+              ? 'Abgeschlossen, einige Schritte sind fehlgeschlagen (siehe oben).'
               : 'Alle Schritte erfolgreich abgeschlossen.';
             var heading = document.getElementById('doneHeading');
             if (anyFail) heading.textContent = 'Installation mit Fehlern abgeschlossen';
@@ -1107,7 +1107,7 @@ $steps = [1 => 'Voraussetzungen', 2 => 'Datenbank', 3 => 'Konfiguration', 4 => '
               if (res.ok) {
                 var hint = document.createElement('span');
                 hint.style.color = 'var(--muted)';
-                hint.textContent = ' — ' + res.detail;
+                hint.textContent = ': ' + res.detail;
                 r.text.appendChild(hint);
               } else {
                 anyFail = true;
@@ -1149,7 +1149,7 @@ $steps = [1 => 'Voraussetzungen', 2 => 'Datenbank', 3 => 'Konfiguration', 4 => '
         <div class="check"><span class="badge <?= $res['admin'][0] ? 'b-ok' : 'b-err' ?>"><?= $res['admin'][0] ? 'OK' : 'Fehler' ?></span><span><?= h($res['admin'][1]) ?></span></div>
       <?php endif; ?>
       <div class="note ok">
-        <strong>Admin-Login</strong> — Admin-Panel unter
+        <strong>Admin-Login</strong>: Admin-Panel unter
         <code>https://management.tracht-digital.de</code>:<br />
         E-Mail: <code><?= h(cfg('admin_email', 'admin@tracht-digital.de')) ?></code> ·
         Passwort: <code><?= h(cfg('admin_password', 'tds-setup-admin')) ?></code><br />
@@ -1160,7 +1160,7 @@ $steps = [1 => 'Voraussetzungen', 2 => 'Datenbank', 3 => 'Konfiguration', 4 => '
     <?php endif; ?>
 
     <div class="note ok">
-      Fertig — es müssen <strong>keine Dienst-Prozesse gestartet</strong> werden: Das Gateway bedient die
+      Fertig, es müssen <strong>keine Dienst-Prozesse gestartet</strong> werden: Das Gateway bedient die
       Services (auth, customer, frontend) im selben PHP-FPM-Prozess (<code>GATEWAY_MODE=inprocess</code>). Prüfen Sie die
         Plattform über <code>/healthz</code>; das interne API-Wiki liefert die Frontend-API unter <code>/wiki.json</code>.
     </div>

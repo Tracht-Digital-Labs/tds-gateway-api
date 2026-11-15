@@ -63,7 +63,7 @@ foreach ($dirs as $dir) {
 }
 
 if (count($services) < 2) {
-    echo "check-shared-deps: fewer than two services given — nothing to compare\n";
+    echo "check-shared-deps: fewer than two services given, nothing to compare\n";
     exit(0);
 }
 
@@ -100,7 +100,7 @@ echo 'check-shared-deps: ' . count($services) . ' services (' . implode(', ', $s
     . count($drift) . " package(s) drifting, " . count($fatal) . " incompatible\n";
 
 if ($drift !== []) {
-    echo "\nShared packages at different minor/patch versions (allowed — the winner is\n"
+    echo "\nShared packages at different minor/patch versions (allowed, the winner is\n"
         . "still decided by dispatch order, so keep the list short):\n";
     foreach ($drift as $row) {
         echo "  {$row}\n";
@@ -108,7 +108,7 @@ if ($drift !== []) {
 }
 
 if ($fatal !== []) {
-    fwrite(STDERR, "\nShared packages at different MAJOR versions — these run in ONE process\n"
+    fwrite(STDERR, "\nShared packages at different MAJOR versions, these run in ONE process\n"
         . "and the first service dispatched wins the class name for all of them:\n\n");
     foreach ($fatal as $row) {
         fwrite(STDERR, "  {$row}\n");

@@ -117,7 +117,7 @@ final class MigrationRunner
                 if ($collisions !== []) {
                     $allOk = false;
                     $this->logger?->error(
-                        "auto-migrate: {$name} skipped — migration class name collision "
+                        "auto-migrate: {$name} skipped, migration class name collision "
                             . '(would fatal when included into the shared process)',
                         ['collisions' => array_map(
                             fn (string $class): string => "{$class} already declared by '{$collisions[$class]}'",
@@ -328,7 +328,7 @@ final class MigrationRunner
     private static function phinxSubprocess(string $serviceDir, int $timeout): array
     {
         if (!self::procOpenAvailable()) {
-            return [false, 'proc_open disabled and in-process Phinx unavailable — migrate manually'];
+            return [false, 'proc_open disabled and in-process Phinx unavailable, migrate manually'];
         }
         if (!is_file($serviceDir . '/vendor/bin/phinx')) {
             return [false, 'phinx not found (vendor/ missing from bundle)'];

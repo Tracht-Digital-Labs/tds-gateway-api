@@ -125,7 +125,7 @@ $paths = \Tds\CoreFrontendApi\Bootstrap::migrationPaths();
 echo 'composed migration paths: ' . count($paths) . "\n";
 
 if ($paths === []) {
-    $failures[] = 'frontend: Bootstrap::migrationPaths() is empty — no extension migrations would ever run.';
+    $failures[] = 'frontend: Bootstrap::migrationPaths() is empty, no extension migrations would ever run.';
 } else {
     try {
         (new \Tds\CoreFrontendApi\Support\MigrationRunner(
@@ -147,7 +147,7 @@ if ($paths === []) {
         if ($applied < count($expected)) {
             $missing = array_diff_key($expected, array_flip(appliedVersions($host, $port, $frontendDb, $user, $pass)));
             $failures[] = 'frontend: only ' . $applied . ' of ' . count($expected)
-                . ' migrations applied — the run stopped. First unapplied: '
+                . ' migrations applied, the run stopped. First unapplied: '
                 . implode(', ', array_slice($missing, 0, 5)) . '.';
         }
     } catch (\Throwable $e) {
@@ -162,7 +162,7 @@ if ($failures !== []) {
     }
     fwrite(
         STDERR,
-        "\nError 1171 means a PRIMARY KEY column is missing 'null' => false — Phinx defaults\n"
+        "\nError 1171 means a PRIMARY KEY column is missing 'null' => false: Phinx defaults\n"
         . "every addColumn() to nullable and only MySQL 8 objects. Fix the migration in its own\n"
         . "repo; do NOT edit an already-released migration's version.\n\n"
     );

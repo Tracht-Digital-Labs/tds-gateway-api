@@ -50,12 +50,12 @@ foreach ($dirs as $dir) {
     $result = tds_composer_audit_classify($raw);
 
     if ($result['unreadable']) {
-        echo "::warning title=composer audit::{$dir}: audit output unreadable — not checked this run\n";
+        echo "::warning title=composer audit::{$dir}: audit output unreadable, not checked this run\n";
         continue;
     }
     foreach ($result['findings'] as $f) {
         $level = $f['blocking'] ? 'error' : 'warning';
-        echo "::{$level} title=composer audit ({$dir})::{$f['package']} — {$f['title']} [{$f['id']}, {$f['severity']}]\n";
+        echo "::{$level} title=composer audit ({$dir})::{$f['package']}: {$f['title']} [{$f['id']}, {$f['severity']}]\n";
     }
     $blocking += $result['blocking'];
     echo sprintf("%s: %d advisories, %d blocking\n", $dir, count($result['findings']), $result['blocking']);

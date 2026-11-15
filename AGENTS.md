@@ -34,6 +34,7 @@ composer test           # phpunit, no DB, no network
 - A new service env var needs a decision in `install.php` or `check-env-parity.php`'s `DEFAULTED`.
 - Migration class names are unique across **all** services; a new backend answers `/healthz` with `db`.
 - The deploy-webhook ping stays non-fatal.
+- Follows the TDS quality standard (`../tds-ops/standards/quality.md`): no AI slop, clean code.
 
 ## Topic files
 

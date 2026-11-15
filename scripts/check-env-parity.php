@@ -62,9 +62,9 @@ const DEFAULTED = [
         'SERVICE_TOKEN' => 'Bootstrap falls back to ADMIN_TOKEN, which the installer does write.',
         'REMEMBER_COOKIE_NAME' => 'Defaults to tds_remember in Bootstrap; not host-dependent.',
         'REMEMBER_TTL_SECONDS' => 'Defaults to JWT_REFRESH_TTL_SECONDS, which the installer writes.',
-        'WEBAUTHN_CHALLENGE_SECRET' => 'Derived from the RS256 private key when unset — the challenge is not a secret, it only must not be attacker-chosen.',
+        'WEBAUTHN_CHALLENGE_SECRET' => 'Derived from the RS256 private key when unset, the challenge is not a secret, it only must not be attacker-chosen.',
         'WEBAUTHN_COOKIE_NAME' => 'Defaults to tds_wa_challenge in Bootstrap; not host-dependent.',
-        'FRONTEND_API_URL' => 'Derived from JWT_ISSUER without its /auth suffix — the gateway origin, which the installer writes.',
+        'FRONTEND_API_URL' => 'Derived from JWT_ISSUER without its /auth suffix, the gateway origin, which the installer writes.',
         'PASSWORD_RESET_TTL_SECONDS' => 'Defaults to 3600 in Bootstrap; not host-dependent.',
         'ACCOUNT_CONFIRM_TTL_SECONDS' => 'Defaults to 86400 in Bootstrap; not host-dependent.',
         'SELF_REGISTRATION' => 'Defaults to on (1) in Bootstrap; set 0 only to close sign-ups.',
@@ -205,7 +205,7 @@ foreach ($args as $arg) {
     foreach (array_keys($defaulted) as $key) {
         if (!in_array($key, $exampleKeys, true)) {
             $problems[] = "{$service}: {$key} is listed as defaulted in " . basename(__FILE__)
-                . " but no longer appears in {$dir}/.env.example — remove the stale entry.";
+                . " but no longer appears in {$dir}/.env.example, remove the stale entry.";
         }
     }
 
