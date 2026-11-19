@@ -39,7 +39,7 @@ Two thin caller workflows over a reusable `_assemble.yml` (`workflow_call`); `ci
 2. `api-pushed` fires `dev.yml`, rebuilding the `dev` bundle. The gateway's `release` stays manual.
 
 Test the chain without an API push:
-`gh api -X POST repos/Tracht-Digital-Solutions/tds-gateway-api/dispatches -f event_type=api-pushed`, then
+`gh api -X POST repos/Tracht-Digital-Labs/tds-gateway-api/dispatches -f event_type=api-pushed`, then
 confirm a `repository_dispatch` run lands and the `dev` branch SHA advances.
 
 ## The deploy-webhook ping is non-fatal

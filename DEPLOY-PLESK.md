@@ -50,7 +50,7 @@ einmal den Release-Workflow ausführen, damit der `release`-Branch existiert.
 ## 2. GitHub-Zugriff für die Plesk-Git-Extension
 
 Die Repos sind privat. Je Domain in der Git-Extension das Repo per **SSH-URL**
-einbinden (`git@github.com:Tracht-Digital-Solutions/<repo>.git`); den von Plesk
+einbinden (`git@github.com:Tracht-Digital-Labs/<repo>.git`); den von Plesk
 angezeigten öffentlichen Schlüssel im jeweiligen GitHub-Repo unter
 *Settings → Deploy keys* (read-only) hinterlegen.
 

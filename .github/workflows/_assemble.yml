@@ -68,7 +68,7 @@ jobs:
       - name: Checkout tds-auth-api
         uses: actions/checkout@v5
         with:
-          repository: Tracht-Digital-Solutions/tds-auth-api
+          repository: Tracht-Digital-Labs/tds-auth-api
           ref: main
           token: ${{ secrets.ASSEMBLE_TOKEN }}
           path: _src/auth
@@ -76,7 +76,7 @@ jobs:
       - name: Checkout tds-customer-api
         uses: actions/checkout@v5
         with:
-          repository: Tracht-Digital-Solutions/tds-customer-api
+          repository: Tracht-Digital-Labs/tds-customer-api
           ref: main
           token: ${{ secrets.ASSEMBLE_TOKEN }}
           path: _src/customer
@@ -84,7 +84,7 @@ jobs:
       - name: Checkout tds-core-frontend-api
         uses: actions/checkout@v5
         with:
-          repository: Tracht-Digital-Solutions/tds-core-frontend-api
+          repository: Tracht-Digital-Labs/tds-core-frontend-api
           ref: main
           token: ${{ secrets.ASSEMBLE_TOKEN }}
           path: _src/frontend
@@ -95,48 +95,48 @@ jobs:
       - name: Checkout tds-frontend-contract-pkg
         uses: actions/checkout@v5
         with:
-          repository: Tracht-Digital-Solutions/tds-frontend-contract-pkg
+          repository: Tracht-Digital-Labs/tds-frontend-contract-pkg
           ref: main
           token: ${{ secrets.ASSEMBLE_TOKEN }}
           path: _src/tds-frontend-contract-pkg
 
       - name: Checkout enabled extensions
         uses: actions/checkout@v5
-        with: { repository: Tracht-Digital-Solutions/tds-ext-time-tracker-pkg, ref: main, token: '${{ secrets.ASSEMBLE_TOKEN }}', path: _src/tds-ext-time-tracker-pkg }
+        with: { repository: Tracht-Digital-Labs/tds-ext-time-tracker-pkg, ref: main, token: '${{ secrets.ASSEMBLE_TOKEN }}', path: _src/tds-ext-time-tracker-pkg }
       - uses: actions/checkout@v5
-        with: { repository: Tracht-Digital-Solutions/tds-ext-customers-pkg, ref: main, token: '${{ secrets.ASSEMBLE_TOKEN }}', path: _src/tds-ext-customers-pkg }
+        with: { repository: Tracht-Digital-Labs/tds-ext-customers-pkg, ref: main, token: '${{ secrets.ASSEMBLE_TOKEN }}', path: _src/tds-ext-customers-pkg }
       - uses: actions/checkout@v5
-        with: { repository: Tracht-Digital-Solutions/tds-ext-billing-pkg, ref: main, token: '${{ secrets.ASSEMBLE_TOKEN }}', path: _src/tds-ext-billing-pkg }
+        with: { repository: Tracht-Digital-Labs/tds-ext-billing-pkg, ref: main, token: '${{ secrets.ASSEMBLE_TOKEN }}', path: _src/tds-ext-billing-pkg }
       - uses: actions/checkout@v5
-        with: { repository: Tracht-Digital-Solutions/tds-ext-lexware-pkg, ref: main, token: '${{ secrets.ASSEMBLE_TOKEN }}', path: _src/tds-ext-lexware-pkg }
+        with: { repository: Tracht-Digital-Labs/tds-ext-lexware-pkg, ref: main, token: '${{ secrets.ASSEMBLE_TOKEN }}', path: _src/tds-ext-lexware-pkg }
       - uses: actions/checkout@v5
-        with: { repository: Tracht-Digital-Solutions/tds-ext-tools-pkg, ref: main, token: '${{ secrets.ASSEMBLE_TOKEN }}', path: _src/tds-ext-tools-pkg }
+        with: { repository: Tracht-Digital-Labs/tds-ext-tools-pkg, ref: main, token: '${{ secrets.ASSEMBLE_TOKEN }}', path: _src/tds-ext-tools-pkg }
       - uses: actions/checkout@v5
-        with: { repository: Tracht-Digital-Solutions/tds-ext-messages-pkg, ref: main, token: '${{ secrets.ASSEMBLE_TOKEN }}', path: _src/tds-ext-messages-pkg }
+        with: { repository: Tracht-Digital-Labs/tds-ext-messages-pkg, ref: main, token: '${{ secrets.ASSEMBLE_TOKEN }}', path: _src/tds-ext-messages-pkg }
       - uses: actions/checkout@v5
-        with: { repository: Tracht-Digital-Solutions/tds-ext-projects-pkg, ref: main, token: '${{ secrets.ASSEMBLE_TOKEN }}', path: _src/tds-ext-projects-pkg }
+        with: { repository: Tracht-Digital-Labs/tds-ext-projects-pkg, ref: main, token: '${{ secrets.ASSEMBLE_TOKEN }}', path: _src/tds-ext-projects-pkg }
       - uses: actions/checkout@v5
-        with: { repository: Tracht-Digital-Solutions/tds-ext-documents-pkg, ref: main, token: '${{ secrets.ASSEMBLE_TOKEN }}', path: _src/tds-ext-documents-pkg }
+        with: { repository: Tracht-Digital-Labs/tds-ext-documents-pkg, ref: main, token: '${{ secrets.ASSEMBLE_TOKEN }}', path: _src/tds-ext-documents-pkg }
       - uses: actions/checkout@v5
-        with: { repository: Tracht-Digital-Solutions/tds-ext-support-tickets-pkg, ref: main, token: '${{ secrets.ASSEMBLE_TOKEN }}', path: _src/tds-ext-support-tickets-pkg }
+        with: { repository: Tracht-Digital-Labs/tds-ext-support-tickets-pkg, ref: main, token: '${{ secrets.ASSEMBLE_TOKEN }}', path: _src/tds-ext-support-tickets-pkg }
       - uses: actions/checkout@v5
-        with: { repository: Tracht-Digital-Solutions/tds-ext-contact-tickets-pkg, ref: main, token: '${{ secrets.ASSEMBLE_TOKEN }}', path: _src/tds-ext-contact-tickets-pkg }
+        with: { repository: Tracht-Digital-Labs/tds-ext-contact-tickets-pkg, ref: main, token: '${{ secrets.ASSEMBLE_TOKEN }}', path: _src/tds-ext-contact-tickets-pkg }
       - uses: actions/checkout@v5
-        with: { repository: Tracht-Digital-Solutions/tds-ext-live-chat-cta-pkg, ref: main, token: '${{ secrets.ASSEMBLE_TOKEN }}', path: _src/tds-ext-live-chat-cta-pkg }
+        with: { repository: Tracht-Digital-Labs/tds-ext-live-chat-cta-pkg, ref: main, token: '${{ secrets.ASSEMBLE_TOKEN }}', path: _src/tds-ext-live-chat-cta-pkg }
       - uses: actions/checkout@v5
-        with: { repository: Tracht-Digital-Solutions/tds-ext-website-cms-pkg, ref: main, token: '${{ secrets.ASSEMBLE_TOKEN }}', path: _src/tds-ext-website-cms-pkg }
+        with: { repository: Tracht-Digital-Labs/tds-ext-website-cms-pkg, ref: main, token: '${{ secrets.ASSEMBLE_TOKEN }}', path: _src/tds-ext-website-cms-pkg }
       - uses: actions/checkout@v5
-        with: { repository: Tracht-Digital-Solutions/tds-ext-blog-cms-pkg, ref: main, token: '${{ secrets.ASSEMBLE_TOKEN }}', path: _src/tds-ext-blog-cms-pkg }
+        with: { repository: Tracht-Digital-Labs/tds-ext-blog-cms-pkg, ref: main, token: '${{ secrets.ASSEMBLE_TOKEN }}', path: _src/tds-ext-blog-cms-pkg }
       - uses: actions/checkout@v5
-        with: { repository: Tracht-Digital-Solutions/tds-ext-shop-pkg, ref: main, token: '${{ secrets.ASSEMBLE_TOKEN }}', path: _src/tds-ext-shop-pkg }
+        with: { repository: Tracht-Digital-Labs/tds-ext-shop-pkg, ref: main, token: '${{ secrets.ASSEMBLE_TOKEN }}', path: _src/tds-ext-shop-pkg }
       - uses: actions/checkout@v5
-        with: { repository: Tracht-Digital-Solutions/tds-ext-cards-pkg, ref: main, token: '${{ secrets.ASSEMBLE_TOKEN }}', path: _src/tds-ext-cards-pkg }
+        with: { repository: Tracht-Digital-Labs/tds-ext-cards-pkg, ref: main, token: '${{ secrets.ASSEMBLE_TOKEN }}', path: _src/tds-ext-cards-pkg }
       - uses: actions/checkout@v5
-        with: { repository: Tracht-Digital-Solutions/tds-ext-analytics-pkg, ref: main, token: '${{ secrets.ASSEMBLE_TOKEN }}', path: _src/tds-ext-analytics-pkg }
+        with: { repository: Tracht-Digital-Labs/tds-ext-analytics-pkg, ref: main, token: '${{ secrets.ASSEMBLE_TOKEN }}', path: _src/tds-ext-analytics-pkg }
       - uses: actions/checkout@v5
-        with: { repository: Tracht-Digital-Solutions/tds-ext-referrals-pkg, ref: main, token: '${{ secrets.ASSEMBLE_TOKEN }}', path: _src/tds-ext-referrals-pkg }
+        with: { repository: Tracht-Digital-Labs/tds-ext-referrals-pkg, ref: main, token: '${{ secrets.ASSEMBLE_TOKEN }}', path: _src/tds-ext-referrals-pkg }
       - uses: actions/checkout@v5
-        with: { repository: Tracht-Digital-Solutions/tds-ext-opensource-pkg, ref: main, token: '${{ secrets.ASSEMBLE_TOKEN }}', path: _src/tds-ext-opensource-pkg }
+        with: { repository: Tracht-Digital-Labs/tds-ext-opensource-pkg, ref: main, token: '${{ secrets.ASSEMBLE_TOKEN }}', path: _src/tds-ext-opensource-pkg }
 
       - name: Set up PHP
         uses: shivammathur/setup-php@v2

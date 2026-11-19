@@ -29,7 +29,7 @@
 #
 # `release/package.json` lists only public packages (astro, @astrojs/node,
 # react, react-dom, and sharp on the two image-heavy sites). Every first-party
-# `@tracht-digital-solutions/*` package is BUNDLED INTO `server/` by the build
+# `@tracht-digital-labs/*` package is BUNDLED INTO `server/` by the build
 # (`vite.ssr.noExternal`), and pack-release fails the build if one leaked. So
 # this install needs no GitHub Packages credential — which is the whole reason
 # the container can rebuild the dependency tree for Linux.
